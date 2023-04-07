@@ -13,7 +13,18 @@ const contactInfo = async (req, res) => {
 };
 
 
+// get API
+const getContact = async (req, res) => {
+    try{
+        const result = await Contact.find({});
+        res.send(result);
+    }
+    catch(er) {
+        res.status(400).send(er);
+    }
+};
 
 
 // export controller
 exports.contactInfo = contactInfo;
+exports.getContact = getContact;
