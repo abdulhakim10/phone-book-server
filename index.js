@@ -13,8 +13,13 @@ app.use(express.json());
 
 // mongoose connect to DB
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.47nvmfs.mongodb.net/phoneBook`;
-mongoose.connect(uri,{ useNewUrlParser: true });
+mongoose.connect(uri,{ useNewUrlParser: true, useUnifiedTopology: true });
 
+// route page
+const contactRoute = require('./routes/contact.route')
+
+// router
+app.use('/contact', contactRoute);
 
 // root API
 app.get('/', (req, res) => {
