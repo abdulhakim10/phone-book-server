@@ -4,11 +4,11 @@ const { Contact } = require("../models/contact.model")
 const contactInfo = async (req, res) => {
 
     try {
-        const contact = await Contact.create(req.body);
+        const contact = await Contact.create(req?.body);
     res.send(contact);
     }
     catch(er){
-        res.status(400).send('error', er);
+        res.status(403).send(er.message);
     }
 };
 
@@ -72,6 +72,18 @@ const updateContact = async (req, res) => {
     catch(er) {
         res.status(400).send(er);
     }
+};
+
+
+// specific contact API
+const getUpdatedContact = async (req, res) => {
+    try {
+        const result = await Contact.findOne({_id : req?.params?.id});
+        res.send(result)
+    }
+    catch(er){
+        res.status(403).send(er);
+    }
 }
 
 
@@ -93,3 +105,4 @@ exports.contactInfo = contactInfo;
 exports.getContact = getContact;
 exports.updateContact = updateContact;
 exports.deleteContact = deleteContact;
+exports.getUpdatedContact = getUpdatedContact;
